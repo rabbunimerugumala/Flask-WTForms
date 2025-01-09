@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% from "includes/form_input.html" import render_input_field with context %}
+
+{% block content %}
+
+<div class="col-md-6 container">
+    <a href="{{url_for('view_details')}}">
+        <button class="btn btn-dark btn-sm">
+            <i class="bi bi-chevron-left"></i>
+            <span class="ml-2">
+                Back
+            </span>
+        </button>
+    </a>
+    <div class="my-3">
+        {% if status == "success" %}
+        <div class="alert alert-success text-center"><a href="{{url_for('get_details',student_id=detail.id)}}"
+                                                        class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+            Details successfully Updated. Click To See</a>
+        </div>
+        {% elif status == "error" %}
+        <div class="alert alert-danger text-center">
+            Something went wrong! Personal Details update failed.
+        </div>
+        {% endif %}
+
+        <form method="POST" class="my-4">
+            {{render_input_field(field=form.first_name, label="First Name *", placeholder="Enter your First Name...",
+            value=detail.first_name)}}
+            {{render_input_field(field=form.last_name, label="Last Name *", placeholder="Enter your Last Name...",
+            value=detail.last_name)}}
+            {{render_input_field(field=form.date_of_birth, label="Date of Birth *", placeholder="Enter your Date of
+            Birth...", value=detail.date_of_birth)}}
+            {{render_input_field(field=form.gender, label="Gender *", placeholder="Select your Gender...",
+            value=detail.gender)}}
+            {{render_input_field(field=form.mobile_no, label="Mobile Number *", placeholder="Enter your Mobile
+            Number...",
+            value=detail.mobile_no)}}
+            {{render_input_field(field=form.email, label="Email Address *", placeholder="Enter your Email Address...",
+            value=detail.email)}}
+
+            <div class="mb-3">
+                <label for="bio" class="pb-1">Bio</label>
+                <textarea placeholder="Enter your Bio.." class="form-control" name="bio"
+                          id="bio">{{detail.bio}}</textarea>
+                {% if form.bio.errors %}
+                {% for error in form.bio.errors %}
+                <div class="form-text text-danger">{{error}}</div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-person-check-fill"></i>
+                    <span class="ml-2">Update</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

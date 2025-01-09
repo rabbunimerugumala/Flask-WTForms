@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}index Page{% endblock %}
+
+{% block content %}
+
+<div><a style="text-decoration: none;
+}" href="{{ url_for('add_personal_details') }}">
+    <button type="button" class="btn btn-lg btn-primary d-grid my-3 col-6 mx-auto">ADD</button>
+</a></div>
+
+<div><a style="text-decoration: none;
+}" class="fs-2" href="{{ url_for('view_details') }}">
+    <button type="button" class="btn btn-lg btn-success d-grid my-5  col-6 mx-auto">SEE</button>
+</a></div>
+
+{% endblock %}

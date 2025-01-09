@@ -1,0 +1,43 @@
+{% extends "base.html "%}
+{% block title %} ALL PERSONAL DETAILS {% endblock%}
+
+{% block content %}
+
+    <div class="container col-md-8">
+        <table class=" py-2 mb-5 table table-striped table-hover">
+
+            <thead class="table-dark">
+            <tr>
+                {% for heading in headings %}
+                <td>{{heading}}</td>
+                {% endfor %}
+            </tr>
+            </thead>
+            {% for detail in details %}
+            <tr >
+                <td>{{ detail.id }}</td>
+                <td>{{ detail.first_name }}</td>
+                <td>{{ detail.last_name }}</td>
+                <td>
+                    <a href="{{url_for('get_details', s`tudent_id=detail.id)}}" class="text-info">
+                        <button class="btn btn-sm btn-info">
+                            <i class="bi bi-box-arrow-up-right"></i>
+                        </button>
+                    </a>
+                </td>
+                <td class="d-flex gap-4">
+                    <a href="{{url_for('edit_student', student_id=detail.id)}}" class="text-warning" >
+                        <button class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                    </a>
+
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
